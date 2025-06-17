@@ -1,3 +1,4 @@
+import AddItems from '@/components/todos/AddItems';
 import { prisma } from '@/utils/prisma';
 
 async function getData() {
@@ -19,7 +20,10 @@ export default async function Home() {
   console.log(data);
   return (
     <div className="w-screen py-20 flex justify-center flex-col items-center">
-      <span>Todo App</span>
+      <span className="text-4xl font-extrabold uppercase">Todo App</span>
+      <div className="add-items flex justify-center flex-col items-center">
+        <AddItems />
+      </div>
     </div>
   );
 }
