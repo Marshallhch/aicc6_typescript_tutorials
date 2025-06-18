@@ -13,6 +13,7 @@ const Form = ({ children, action, onSubmit }: formProps) => {
       }}
       onSubmit={onSubmit}
       ref={ref}
+      className="w-full"
     >
       {/* 전달되는 값이 HTML 요소인 경우 children으로 전달 */}
       {children}
