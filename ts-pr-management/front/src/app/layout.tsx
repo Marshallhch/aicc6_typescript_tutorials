@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { Montserrat, Noto_Sans_KR } from 'next/font/google';
 import './globals.css';
-import DashboardWrapper from './dashboardWrapper';
+import DashboardWrapper from './DashboardWrapper';
 
 export const montserrat = Montserrat({
   subsets: ['latin'],
