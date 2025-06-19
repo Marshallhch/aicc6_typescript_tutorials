@@ -128,3 +128,15 @@ ALTER TABLE "Comment" ADD CONSTRAINT "Comment_taskId_fkey" FOREIGN KEY ("taskId"
 
 -- AddForeignKey
 ALTER TABLE "Comment" ADD CONSTRAINT "Comment_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("userId") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- Get Team
+SELECT 
+  t.*, 
+  u1.username AS "productOwner",
+  u2.username AS "projectManager"
+FROM 
+  teams t
+LEFT JOIN 
+  users u1 ON u1.user_id = t.product_owner_user_id
+LEFT JOIN 
+  users u2 ON u2.user_id = t.project_manager_user_id; 
