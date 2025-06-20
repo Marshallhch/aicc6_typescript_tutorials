@@ -28,7 +28,27 @@ import { PersistGate } from 'redux-persist/integration/react';
 import createWebStorage from 'redux-persist/lib/storage/createWebStorage';
 import { api } from '@/state/api';
 
-const storage = createWebStorage('local');
+/* REDUX PERSISTENCE */
+// 서버 사이드 렌더링(SSR) 환경에서 localStorage를 사용할 수 없을 때, 이를 대체하기 위한 "무동작(No-op) 스토리지" 객체를 생성
+// window가 존재하는 않는 환경에서 로컬 및 세션 스토리지 사용 불가
+const createNoopStorage = () => {
+  return {
+    getItem(_key: any) {
+      return Promise.resolve(null);
+    },
+    setItem(_key: any, value: any) {
+      return Promise.resolve(value);
+    },
+    removeItem(_key: any) {
+      return Promise.resolve();
+    },
+  };
+};
+
+const storage =
+  typeof window === 'undefined'
+    ? createNoopStorage() // 서버 사이드에서는 무동작 스토리지 객체 반환
+    : createWebStorage('local'); // 브라우저 환경에서는 실제 localStorage 객체 반환
 
 const persistConfig = {
   key: 'root',
